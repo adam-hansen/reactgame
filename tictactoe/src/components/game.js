@@ -15,7 +15,17 @@ class Game extends React.Component {
             }],
             xIsNext: true,
             stepNumber: 0,
+            playerid: ""
         };
+
+        props.cableApp.cable.subscriptions.create({
+                channel: 'GameChannel'
+        },
+        {
+                received: (id) => {
+                    this.state.setState({playerid:id});
+                }
+        });
     }
     
     handleClick(i){
