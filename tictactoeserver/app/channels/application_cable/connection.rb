@@ -3,7 +3,7 @@ module ApplicationCable
     identified_by :uuid
 
     def connect
-      self.uuid = SecureRandom.urlsafe_base64
+      self.uuid = SecureRandom.urlsafe_base64      
     end
   end
 end
