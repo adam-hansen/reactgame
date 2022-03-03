@@ -18,7 +18,7 @@ class Game extends React.Component {
             playerid: ""
         };
 
-        props.cableApp.cable.subscriptions.create({
+        this.gameChannel = props.cableApp.cable.subscriptions.create({
                 channel: 'GameChannel'
         },
         {
@@ -49,6 +49,8 @@ class Game extends React.Component {
             xIsNext: !this.state.xIsNext,
             stepNumber: history.length,
         });
+
+        this.gameChannel.send({i})
     }
 
     jumpTo(step) {

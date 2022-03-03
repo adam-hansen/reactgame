@@ -2,11 +2,22 @@ class GameChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
 
-    stream_from "player_#{uuid}"
-    ActionCable.server.broadcast("player_#{uuid}", {body:"player connected #{uuid}"})
+    #hardcoding this now, prep for different games in the future
+    gameid = "game1"
+    
+    stream_from "game_#{gameid}"
+    ActionCable.server.broadcast("game_#{gameid}", {body:"player connected #{uuid} to game #{gameid}"})
   end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+  end
+
+  #primary source of state changes, a player will make a move
+  def receive(data)
+    puts(uuid, data)
+    #user's id is on the channel
+    #move is the specific square taken
+    #logic in game should track which user is which piece  
   end
 end
