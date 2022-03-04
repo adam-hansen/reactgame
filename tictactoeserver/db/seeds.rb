@@ -6,4 +6,4 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Game.create(gameid: "game1", p1_is_next: true)
+Game.create(gameid: "game1", p1_is_next: true, boardstate: Array.new(9))

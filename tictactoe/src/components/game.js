@@ -50,7 +50,7 @@ class Game extends React.Component {
             stepNumber: history.length,
         });
 
-        this.gameChannel.send({i})
+        this.gameChannel.send({grid_position: i})
     }
 
     jumpTo(step) {
