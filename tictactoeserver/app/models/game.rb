@@ -13,30 +13,22 @@ class Game < ApplicationRecord
         #could use things like an incrementing or unique turn identifier to go along with move 
         #add guards in case square was already clicked on and other common scenarios
         
-        #general logging to help trace as I wire things up
-        puts(playerid, grid_position, gameid)
-
-        #using playerids for grid position, not efficient on storage and would clean up
-        #struggling with creating an empty array not a nil, nil array throws an undefined exception when writing to it
-        #my create record for the seed data is set to boardstate: Array.new(9) but it is being returned as nil
-        # if(boardstate == nil)
-        #     boardstate = Array.new(9)    
-        # end
-        #puts("boardstate #{boardstate}")
-        #boardstate[grid_position] = playerid
-
+        #update grid positions
+        puts(self.boardstate)
+        self.boardstate[grid_position] = playerid
+        puts(self.boardstate)
 
         #set next player
-        p1_is_next = !p1_is_next
+        self.p1_is_next = !p1_is_next
 
 
         #calculate if there is a winner
         puts(calculateWinner())
 
+        self.save
+
         #return
         return "is valid"
-
-    
     end
 
 

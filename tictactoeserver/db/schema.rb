@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2022_02_23_153658) do
   create_table "games", force: :cascade do |t|
     t.string "gameid"
-    t.integer "boardstate"
+    t.text "boardstate", default: "--- []\n"
     t.boolean "p1_is_next"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
