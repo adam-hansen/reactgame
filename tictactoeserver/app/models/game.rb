@@ -1,4 +1,7 @@
 class Game < ApplicationRecord
+    #this is super critical, the boardstate array will show up in the db, it can be queried, creating records from the seed will serialize correctly
+    #BUT if you update a value without this, it will put it in the character position of the string and not the array index
+    serialize :boardstate
 
     def assign_player(playerid)
         #should really stores players in a hash, doing it this way for now to avoid seralization issues with hash maps
@@ -60,10 +63,3 @@ class Game < ApplicationRecord
         #   return null;
     end
 end
-
-
-# create_table :games do |t|
-#     t.string :gameid
-#     t.integer :boardstate, array: true, default: []
-#     t.boolean :p1_is_next
-#     t.timestamps
