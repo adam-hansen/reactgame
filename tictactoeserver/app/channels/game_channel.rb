@@ -18,16 +18,16 @@ class GameChannel < ApplicationCable::Channel
   end
 
   #primary source of state changes, a player will make a move
+  #return if a winner is found, should probably have a status object returned but this works to prove the frameworks
   def receive(data)
-    #puts(uuid, data)
-
-    if(data["grid_position"])
-      @game = Game.find_by(gameid: 'game1')
-      @game.handle_turn(uuid, data["grid_position"]) 
-    end
     
-    #user's id is on the channel
-    #move is the specific square taken
-    #logic in game should track which user is which piece  
+    if(data["grid_position"])
+      gameid = "game1"
+
+      @game = Game.find_by(gameid: gameid)
+      @game.handle_turn(uuid, data["grid_position"]) 
+      ActionCable.server.broadcast("game_#{gameid}", {winner: @game.handle_turn(uuid, data["grid_position"]) })
+    end
+
   end
 end

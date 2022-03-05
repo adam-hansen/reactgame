@@ -32,12 +32,12 @@ class Game < ApplicationRecord
 
 
         #calculate if there is a winner
-        calculateWinner()
+        
 
         self.save
 
         #return
-        return "is valid"
+        return calculateWinner(playerid)
     end
 
     def reset
@@ -48,26 +48,27 @@ class Game < ApplicationRecord
         self.save
     end
 
-    def calculateWinner()
-        puts("calc if winner")
-        return true
-        #rough logic taken directly from ReactJS tictactoe tutorial
-        # const lines = [
-        #     [0, 1, 2],
-        #     [3, 4, 5],
-        #     [6, 7, 8],
-        #     [0, 3, 6],
-        #     [1, 4, 7],
-        #     [2, 5, 8],
-        #     [0, 4, 8],
-        #     [2, 4, 6],
-        #   ];
-        #   for (let i = 0; i < lines.length; i++) {
-        #     const [a, b, c] = lines[i];
-        #     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        #       return squares[a];
-        #     }
-        #   }
-        #   return null;
+    #this is ugly, straight from the ReactJS tictactoe tutorial
+    Winning_states = [[0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],]
+
+    def calculateWinner(playerid)
+        for i in Winning_states do
+            if (self.boardstate[i[0]] && 
+                    self.boardstate[i[0]] === self.boardstate[i[1]] && 
+                    self.boardstate[i[0]] === self.boardstate[i[2]]) 
+            
+                puts ("winner found #{playerid}")
+                return boardstate[i[0]]
+            end
+        end
+
+        return nil
     end
 end
