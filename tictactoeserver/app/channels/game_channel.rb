@@ -8,6 +8,9 @@ class GameChannel < ApplicationCable::Channel
     
     stream_from "game_#{gameid}"
     ActionCable.server.broadcast("game_#{gameid}", {body:"player connected #{uuid} to game #{gameid}"})
+
+    @game = Game.find_by(gameid: 'game1')
+    @game.assign_player(uuid)
   end
 
   def unsubscribed

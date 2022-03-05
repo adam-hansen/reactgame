@@ -1,6 +1,13 @@
 class Game < ApplicationRecord
 
+    def assign_player(playerid)
+        #should really stores players in a hash, doing it this way for now to avoid seralization issues with hash maps
+        #focusing on geting the rest of the game logic up and i'll come back on this
+        self.player_one_id.blank? ? ( self.player_one_id = playerid) : ( self.player_two_id = playerid)
+        puts("player one = #{self.player_one_id} , player two = #{self.player_two_id }")
 
+        self.save
+    end
     
     #method for assigning players to positions (playerid = p1, playerid = p2)
     #method for handleing a move (playerid, position being) returns if move was valid, if it produced a winning result
@@ -14,7 +21,6 @@ class Game < ApplicationRecord
         #add guards in case square was already clicked on and other common scenarios
         
         #update grid positions
-        puts(self.boardstate)
         self.boardstate[grid_position] = playerid
         puts(self.boardstate)
 
@@ -23,14 +29,13 @@ class Game < ApplicationRecord
 
 
         #calculate if there is a winner
-        puts(calculateWinner())
+        calculateWinner()
 
         self.save
 
         #return
         return "is valid"
     end
-
 
     def calculateWinner()
         puts("calc if winner")

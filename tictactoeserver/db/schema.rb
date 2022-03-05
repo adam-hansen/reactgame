@@ -17,6 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_23_153658) do
     t.boolean "p1_is_next"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "player_one_id"
+    t.string "player_two_id"
   end
 
   create_table "players", force: :cascade do |t|
