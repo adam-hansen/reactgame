@@ -40,6 +40,14 @@ class Game < ApplicationRecord
         return "is valid"
     end
 
+    def reset
+        self.boardstate = Array.new(9)
+        self.p1_is_next = true
+        self.player_one_id = nil
+        self.player_two_id = nil
+        self.save
+    end
+
     def calculateWinner()
         puts("calc if winner")
         return true
