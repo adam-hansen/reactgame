@@ -19,27 +19,22 @@ class Game < ApplicationRecord
     #this method is terrible but I need to start somewhere to grok the syntax for defining a method and handling returns on a model
     def handle_turn(playerid, grid_position)
         
-        #need to look at preventing out of turn or order moves
-        #could use things like an incrementing or unique turn identifier to go along with move 
-        #add guards in case square was already clicked on and other common scenarios
-        
-        #update grid positions
-        marker = self.player_one_id == playerid ? "X" : "O"
+        if(self.winner.blank? && 
+            ((playerid == self.player_one_id && self.p1_is_next) || 
+            (playerid == self.player_two_id && !self.p1_is_next)))
 
-        self.boardstate[grid_position] = marker
-        puts(self.boardstate)
+            #update grid positions
+            marker = self.player_one_id == playerid ? "X" : "O"
 
-        #set next player
-        self.p1_is_next = !p1_is_next
+            self.boardstate[grid_position] = marker
+            puts(self.boardstate)
 
+            #set next player
+            self.p1_is_next = !p1_is_next
 
-        #calculate if there is a winner
-        
-
-        self.save
-
-        #return
-        return calculateWinner(playerid)
+            self.winner = calculateWinner(playerid)
+            self.save
+        end
     end
 
     def reset
