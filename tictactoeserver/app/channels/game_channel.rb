@@ -26,7 +26,8 @@ class GameChannel < ApplicationCable::Channel
 
       @game = Game.find_by(gameid: gameid)
       @game.handle_turn(uuid, data["grid_position"]) 
-      ActionCable.server.broadcast("game_#{gameid}", {winner: @game.handle_turn(uuid, data["grid_position"]) })
+
+      ActionCable.server.broadcast("game_#{gameid}", {game: @game})
     end
 
   end

@@ -24,7 +24,9 @@ class Game < ApplicationRecord
         #add guards in case square was already clicked on and other common scenarios
         
         #update grid positions
-        self.boardstate[grid_position] = playerid
+        marker = self.player_one_id == playerid ? "X" : "O"
+
+        self.boardstate[grid_position] = marker
         puts(self.boardstate)
 
         #set next player
@@ -45,6 +47,8 @@ class Game < ApplicationRecord
         self.p1_is_next = true
         self.player_one_id = nil
         self.player_two_id = nil
+        self.winner = nil
+        self.turn = 0
         self.save
     end
 
@@ -65,7 +69,7 @@ class Game < ApplicationRecord
                     self.boardstate[i[0]] === self.boardstate[i[2]]) 
             
                 puts ("winner found #{playerid}")
-                return boardstate[i[0]]
+                return playerid
             end
         end
 
