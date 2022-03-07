@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from './board';
 import BoardStatus from './boardstatus';
+import GameControls from './gamecontrols';
 
 const p1symbol = 'X';
 const p2symbol = 'O'
@@ -51,8 +52,13 @@ class Game extends React.Component {
             })
     }
     
-    handleClick(i){
+    handleSquareClick(i){
         this.gameChannel.send({grid_position: i})
+    }
+
+    //should really have a generic set of commands to switch off of, this is just enough to get pipes in place
+    handleResetClick(i){
+        this.gameChannel.send({reset: true})
     }
 
     jumpTo(step) {
@@ -81,9 +87,12 @@ class Game extends React.Component {
                 <div>
                     <BoardStatus value= {statusText}/>
                 </div>
+                <div>
+                    <GameControls onClick = {(i) => this.handleResetClick()} />
+                </div>
                 <Board 
                     squares={squarestorender}
-                    onClick={(i) => this.handleClick(i)}
+                    onClick={(i) => this.handleSquareClick(i)}
                 />
             </div>
         </div>

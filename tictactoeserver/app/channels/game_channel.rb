@@ -22,10 +22,21 @@ class GameChannel < ApplicationCable::Channel
   def receive(data)
     
     if(data["grid_position"])
+
+      puts("in grid positon")
       gameid = "game1"
 
       @game = Game.find_by(gameid: gameid)
       @game.handle_turn(uuid, data["grid_position"]) 
+
+      ActionCable.server.broadcast("game_#{gameid}", {game: @game})
+
+    else(data["reset"])
+      puts("in reset")
+      gameid = "game1"
+
+      @game = Game.find_by(gameid: gameid)
+      @game.reset 
 
       ActionCable.server.broadcast("game_#{gameid}", {game: @game})
     end
