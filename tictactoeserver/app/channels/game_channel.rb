@@ -1,16 +1,19 @@
 class GameChannel < ApplicationCable::Channel
   
+  #using this as a variable as ideally this is input to allow multiple games at the same time
+  Gameid = "game1"
+
   def subscribed
-    # stream_from "some_channel"
 
-    #hardcoding this now, prep for different games in the future
-    gameid = "game1"
-    
-    stream_from "game_#{gameid}"
-    ActionCable.server.broadcast("game_#{gameid}", {body:"player connected #{uuid} to game #{gameid}"})
+    stream_from "game_#{Gameid}"
 
-    @game = Game.find_by(gameid: 'game1')
+    @game = Game.find_by(gameid: Gameid)
     @game.assign_player(uuid)
+
+    ActionCable.server.broadcast("game_#{Gameid}", {message:"player connected #{uuid} to game #{Gameid}"})
+
+    #I thought about creating a seperate channel for player, that way player specific messages go back to the player while game state goes to all
+    #out of time to implement
   end
 
   def unsubscribed
@@ -23,23 +26,16 @@ class GameChannel < ApplicationCable::Channel
     
     if(data["grid_position"])
 
-      puts("in grid positon")
-      gameid = "game1"
-
-      @game = Game.find_by(gameid: gameid)
+      @game = Game.find_by(gameid: Gameid)
       @game.handle_turn(uuid, data["grid_position"]) 
 
-      ActionCable.server.broadcast("game_#{gameid}", {game: @game})
-
     else(data["reset"])
-      puts("in reset")
-      gameid = "game1"
-
-      @game = Game.find_by(gameid: gameid)
+      
+      @game = Game.find_by(gameid: Gameid)
       @game.reset 
 
-      ActionCable.server.broadcast("game_#{gameid}", {game: @game})
     end
 
+    ActionCable.server.broadcast("game_#{Gameid}", {game: @game})
   end
 end

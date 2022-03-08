@@ -15,7 +15,7 @@ class Game extends React.Component {
             squares: Array(9).fill(null),
             xIsNext: true,
             stepNumber: 0,
-            playerid: "",
+            playerPos: "",
             winner: "",
         };
 
@@ -33,7 +33,12 @@ class Game extends React.Component {
                             xIsNext: data.game.p1_is_next,
                             stepNumber: data.game.turn,
                             squares: data.game.boardstate,
+                            winner: data.game.winner
                         });
+                    } else if (data.playerpos) {
+                        this.setState({
+                            playerPos: data.playerpos
+                        })
                     }
                 }
         });
@@ -79,8 +84,6 @@ class Game extends React.Component {
             statusText = `Next player: ${(this.state.xIsNext ? p1symbol : p2symbol)}`;  
         }
         
-        var squarestorender = this.state.squares;
-
         return (
         <div className="game">
             <div className="game-board">
@@ -91,7 +94,7 @@ class Game extends React.Component {
                     <GameControls onClick = {(i) => this.handleResetClick()} />
                 </div>
                 <Board 
-                    squares={squarestorender}
+                    squares={this.state.squares}
                     onClick={(i) => this.handleSquareClick(i)}
                 />
             </div>

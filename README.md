@@ -34,3 +34,9 @@ Session (use a user provided session ID to bootstrap app)
 //references
 https://dev.to/brandonbrown4792/web-sockets-with-rails-6-and-reactjs-2c45
 https://www.cookieshq.co.uk/posts/tic-tac-toe-game-in-rails-5-with-action-cable 
+
+
+//TODO So I don't forget
+return game from controller with current state and wire that up to refresh FE
+Add inputs to FE for selecting a room, selecting a player slot, and for reseting the game
+These 3 things would allow for a reasonable number of users to play at the same time, games could also be spectated a
