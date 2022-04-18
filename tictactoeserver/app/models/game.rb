@@ -12,9 +12,6 @@ class Game < ApplicationRecord
         self.save
     end
     
-    #method for assigning players to positions (playerid = p1, playerid = p2)
-    #method for handleing a move (playerid, position being) returns if move was valid, if it produced a winning result
-    #method for calculating if a move wins
 
     #this method is terrible but I need to start somewhere to grok the syntax for defining a method and handling returns on a model
     def handle_turn(playerid, grid_position)
