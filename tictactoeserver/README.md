@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# something of note with Rails, a concept of Fat Model, Skinny Control seems common
+# basically logic and processing goes into the model classes and the controls are primarily for routing / filtering type activities
+# so for the tic tac toe game it seems like have the logic of calculating changes to the game such as "is the play valid, did the play produce a winning result" are things that we would have functions on the model for
