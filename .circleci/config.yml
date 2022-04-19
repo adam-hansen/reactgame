@@ -28,6 +28,13 @@ jobs:
       - checkout:
           path: ~/reactgame
       - ruby/install-deps #install dependencies using ruby orb
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: tictactoeserver
+          # Must be relative path from root
+          paths:
+            - echo-output
 
   test_railsapi:
     working_directory: ~/reactgame/tictactoeserver
@@ -35,6 +42,8 @@ jobs:
       - image: cimg/ruby:2.7-node #ruby and node image
     
     steps:
+      - attach_workspace:
+          at: /reactgame/tictactoeserver
       - run:
           name: Run test
           command: rails test
