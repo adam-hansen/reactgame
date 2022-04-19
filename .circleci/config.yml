@@ -31,7 +31,6 @@ jobs:
           pkg-manager: yarn
           cache-key: "yarn.lock"
 
-
   test_railsapi:
     docker:
       - image: cimg/ruby:2.7-node #ruby and node image
@@ -40,9 +39,6 @@ jobs:
       - run:
           name: "Say hello"
           command: "Look ma, i'm running test"
-
-
-
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
