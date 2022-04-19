@@ -2,25 +2,49 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+# Declare the orbs that we'll use in our config.
+# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
+# orbs copied from ruby sample config https://circleci.com/docs/2.0/language-ruby/ 
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+
+  #expecting this initial to fail, i'm using a nested project structure with FE and BE in different folders
+  #I'm assuming that it will be seperate "jobs" such as "build FE" and "build BE" for some terrible names
+  build_railsapi:
+    working_directory: ~/tictactoeserver
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    # in circeci sample auth is also setup for dockerhub, unsure if required here
     docker:
-      - image: cimg/base:stable
+      - image: cimg/ruby:2.7-node #ruby and node image
+
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
+      - ruby/install-deps #install dependencies using ruby orb
+      - node/install-packages:
+        pkg-manager: yarn
+        cache-key: "yarn.lock"
+
+  test_railsapi:
+    docker:
+      - image: cimg/ruby:2.7-node #ruby and node image
       - run:
           name: "Say hello"
-          command: "echo Hello, World!"
+          command: "Look ma, i'm running test"
+
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  learning_workflow:
     jobs:
-      - say-hello
+      - build_railsapi
+      - test_railsapi
