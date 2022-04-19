@@ -45,8 +45,11 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
-          name: Run test
-          command: rails test
+          name: run db migration
+          command: bundle exec rails db:migrate
+      - run:
+          name: run testexit
+          command: bundle exec rails test
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
