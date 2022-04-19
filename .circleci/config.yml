@@ -16,7 +16,7 @@ jobs:
   #expecting this initial to fail, i'm using a nested project structure with FE and BE in different folders
   #I'm assuming that it will be seperate "jobs" such as "build FE" and "build BE" for some terrible names
   build_railsapi:
-    # working_directory: ~/tictactoeserver
+    working_directory: ~/reactgame/tictactoeserver
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     # in circeci sample auth is also setup for dockerhub, unsure if required here
     docker:
@@ -25,7 +25,8 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - checkout
+      - checkout:
+          path: ~/reactgame
       - ruby/install-deps #install dependencies using ruby orb
       - node/install-packages:
           pkg-manager: yarn
