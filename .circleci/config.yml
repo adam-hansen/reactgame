@@ -43,7 +43,7 @@ jobs:
     
     steps:
       - attach_workspace:
-          at: /reactgame/tictactoeserver
+          at: ./
       - run:
           name: Run test
           command: rails test
