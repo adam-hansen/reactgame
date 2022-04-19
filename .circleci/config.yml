@@ -28,9 +28,6 @@ jobs:
       - checkout:
           path: ~/reactgame
       - ruby/install-deps #install dependencies using ruby orb
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
 
   test_railsapi:
     docker:
@@ -48,3 +45,5 @@ workflows:
     jobs:
       - build_railsapi
       - test_railsapi
+          requires:
+            - build_railsapi
