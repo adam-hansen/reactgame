@@ -44,6 +44,6 @@ workflows:
   learning_workflow:
     jobs:
       - build_railsapi
-      - test_railsapi
+      - test_railsapi:
           requires:
             - build_railsapi
