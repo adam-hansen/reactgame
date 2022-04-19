@@ -46,7 +46,7 @@ jobs:
           at: ./
       - run:
           name: run db migration
-          command: bundle exec rails db:migrate
+          command: bundle exec rails db:migrate RAILS_ENV=test #should set rails env somewhere else i'm sure but doing this to get it working
       - run:
           name: run testexit
           command: bundle exec rails test
