@@ -30,13 +30,14 @@ jobs:
       - ruby/install-deps #install dependencies using ruby orb
 
   test_railsapi:
+    working_directory: ~/reactgame/tictactoeserver
     docker:
       - image: cimg/ruby:2.7-node #ruby and node image
     
     steps:
       - run:
-          name: "Say hello"
-          command: "echo 'Look ma, I am running test'"
+          name: Run test
+          command: rails test
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
