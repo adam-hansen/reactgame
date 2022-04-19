@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time='0.875703' skipped='0' failures='0' errors='0' name="GameControllerTest" assertions='7' tests='3' timestamp="2022-04-19T22:06:24+00:00">
+  <testcase time='0.730343' file="test/controllers/game_controller_test.rb" name="test_the_truth" assertions='1'>
+  </testcase>
+  <testcase time='0.115418' file="test/controllers/game_controller_test.rb" name="test_null_and_200_returned_for_game_that_doesn&#39;t_exist" assertions='3'>
+  </testcase>
+  <testcase time='0.029942' file="test/controllers/game_controller_test.rb" name="test_game_returned_if_exist" assertions='3'>
+  </testcase>
+</testsuite>
