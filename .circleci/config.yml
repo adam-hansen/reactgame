@@ -28,8 +28,9 @@ jobs:
       - checkout
       - ruby/install-deps #install dependencies using ruby orb
       - node/install-packages:
-        pkg-manager: yarn
-        cache-key: "yarn.lock"
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+
 
   test_railsapi:
     docker:
