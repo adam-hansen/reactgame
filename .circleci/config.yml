@@ -38,7 +38,7 @@ jobs:
     steps:
       - run:
           name: "Say hello"
-          command: "Look ma, i'm running test"
+          command: "Look ma, I am running test"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
