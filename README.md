@@ -1,4 +1,5 @@
 # reactgame
+[![CircleCI](https://circleci.com/gh/adam-hansen/reactgame/tree/main.svg?style=svg)](https://circleci.com/gh/adam-hansen/reactgame/tree/main)
 
 # commands to start
 navigate to tictactoe and do npm start (react app using node framework for handling stuff)
