@@ -35,6 +35,8 @@ jobs:
   test_railsapi:
     docker:
       - image: cimg/ruby:2.7-node #ruby and node image
+    
+    steps:
       - run:
           name: "Say hello"
           command: "Look ma, i'm running test"
