@@ -34,3 +34,4 @@
 
 # Ignore test results
 /test/reports/*
+/coverage
