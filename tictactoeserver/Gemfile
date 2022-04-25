@@ -48,3 +48,5 @@ end
 
 
 gem "minitest-ci", "~> 3.4"
+
+gem "simplecov", require: false, group: :test

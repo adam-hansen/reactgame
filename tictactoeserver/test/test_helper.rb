@@ -1,3 +1,10 @@
+# required to be at the very top to ensure it works correctly according to their instrucations
+# https://github.com/simplecov-ruby/simplecov#getting-started
+require 'simplecov'
+SimpleCov.start
+
+
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
